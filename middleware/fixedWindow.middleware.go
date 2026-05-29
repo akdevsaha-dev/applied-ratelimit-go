@@ -9,14 +9,13 @@ import (
 	"github.com/redis/go-redis/v9"
 )
 
-const (
-	limit      = 5
-	windowSize = 60 * time.Second
-)
-
 func FixedWindowRateLimit(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		var identifier string
+		const (
+			limit      = 5
+			windowSize = 60 * time.Second
+		)
 		ctx := r.Context()
 		userId := r.Context().Value("userId")
 		if userId != nil {

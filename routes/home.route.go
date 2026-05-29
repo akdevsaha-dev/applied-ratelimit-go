@@ -8,6 +8,6 @@ import (
 )
 
 func RegisterHomeRoute(mux *http.ServeMux) {
-	homeHandler := middleware.FixedWindowRateLimit(http.HandlerFunc(handlers.HomeHandler))
+	homeHandler := middleware.SlidingLogMiddleware(http.HandlerFunc(handlers.HomeHandler))
 	mux.Handle("/get-details", homeHandler)
 }
