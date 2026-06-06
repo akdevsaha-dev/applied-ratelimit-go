@@ -8,6 +8,6 @@ import (
 )
 
 func RegisterHomeRoute(mux *http.ServeMux) {
-	homeHandler := middleware.TokenBucketMiddleware(http.HandlerFunc(handlers.HomeHandler))
+	homeHandler := middleware.LeakyBucketMiddleware(http.HandlerFunc(handlers.HomeHandler))
 	mux.Handle("/get-details", homeHandler)
 }
